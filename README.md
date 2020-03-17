@@ -25,24 +25,23 @@ fetch(url + "/posts/1", {
   //     "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
   //}
 
-        // pentru a afisa in pagina titlul si respectiv continutul postarii
-        // avem nevoie sa cream cele doua elemente HTML, pe care deocamdata le stocam in 
-        // doua variabile headerTitle si respectiv paragraph
+      // pentru a afisa in pagina titlul si respectiv continutul postarii
+      // avem nevoie sa cream cele doua elemente HTML, pe care deocamdata le stocam in 
+      // doua variabile headerTitle si respectiv paragraph
      var headerTitle = document.createElement("h1");
      var paragraph = document.createElement("p");
 
-        // pe header title am folosit innerText, deoarece am presupus ca textul nu poate contine 
-        // elemente HTML si ca este un simplu text
+      // pe header title am folosit innerText, 
+      // deoarece am presupus ca title-ul nu poate contine elemente HTML si ca este un simplu text
      headerTitle.innerText = jsonResp.title;
-        // pentru paragraf am folosit innerHTML, deoarece am presupus ca in continut putem avea elemente
-        // html si vom vrea sa fie afisate frumos in pagina
+      // pentru paragraf am folosit innerHTML, 
+      // deoarece am presupus ca in continut putem avea elemente html si vom vrea sa fie afisate frumos in pagina
      paragraph.innerHTML = jsonResp.body;
-        // pentru a pune elementele in pagina, trebuie mai intai sa "selectam" elementul body
+      // pentru a pune elementele in pagina, trebuie mai intai sa "selectam" elementul body
      var theBody = document.querySelector("body");
-        // iar apoi sa punem in el cele doua elemente headerTitle si respectiv paragraph
+      // iar apoi sa punem in el cele doua elemente headerTitle si respectiv paragraph
      theBody.appendChild(headerTitle);
      theBody.appendChild(paragraph);
-
 });
 ```
 
@@ -53,29 +52,30 @@ Daca facem o cerere la server sa ne dea toata lista de postari pe care le are, v
 fetch(url + "/posts", {
      method: "GET"
 }).then(function(r){
-        // variabila r contine raspunsul de la server intr-o forma predefinita de catre Fetch API
-        // dar pentru ca noi avem nevoie doar de raspunsul intr-o forma simplificata
-        // vom apela metoda json() de pe acest obiect r, pentru al converti in forma dorita
+    // variabila r contine raspunsul de la server intr-o forma predefinita de catre Fetch API
+    // dar pentru ca noi avem nevoie doar de raspunsul intr-o forma simplificata
+    // vom apela metoda json() de pe acest obiect r, pentru al converti in forma dorita
     return r.json();
 }).then(function(jsonResp){
     console.log(jsonResp);
 
-        // vom incepe cu "selectarea" elementului body, inainte de a parcurge lista de postari
-        // pentru a evita ca pentru fiecare postare sa facem aceeasi "interogare" a DOM-ului
-        // pentru a "selecta" acelasi element: body-ul, de fiecare data
-     var theBody = document.querySelector("body");
-        // parcurgem lista de postari
-     for(var i = 0; i < jsonResp.length; i++ ) {
-            // repetam operatiile de mai sus, pentru fiecarep postare in parte, pt fiecare jsonResp[i]
-         var headerTitle = document.createElement("h1");
-         var paragraph = document.createElement("p");
+    // vom incepe cu "selectarea" elementului body, inainte de a parcurge lista de postari
+    // pentru a evita ca pentru fiecare postare sa facem aceeasi "interogare" a DOM-ului
+    // pentru a "selecta" acelasi element: body-ul, de fiecare data
+   var theBody = document.querySelector("body");
+    // parcurgem lista de postari
+   for(var i = 0; i < jsonResp.length; i++ ) {
+        // repetam operatiile de mai sus (creare elemente html, pus in ele contiut si append la body), 
+        // pentru fiecare postare in parte, pt fiecare jsonResp[i]
+       var headerTitle = document.createElement("h1");
+       var paragraph = document.createElement("p");
 
-         headerTitle.innerText = jsonResp[i].title;
-         paragraph.innerHTML = jsonResp[i].body;
+       headerTitle.innerText = jsonResp[i].title;
+       paragraph.innerHTML = jsonResp[i].body;
 
-         theBody.appendChild(headerTitle);
-         theBody.appendChild(paragraph);
-     }
+       theBody.appendChild(headerTitle);
+       theBody.appendChild(paragraph);
+   }
  });
 ```
 
@@ -114,13 +114,13 @@ fetch(url + "/posts", {
    return response.json();
 }).then(function(jsonResponse){
     console.log("converted response ", jsonResponse);
-        // odata ce am creat o postare noua, API-ul ne returneaza pe jsonResponse doar id-ul noii postari create
-        // deci pentru a avea tot continutul postarii noastre, asa cum a fost el stocat pe server
-        // vom face un request, similar cu cel de mai sus, un GET, dar de data acesta cu id-ul postarii ce tocmai am creat-o
-        // deci la URL vom concatena acest id
+    // odata ce am creat o postare noua, API-ul ne returneaza pe jsonResponse doar id-ul noii postari create
+    // deci pentru a avea tot continutul postarii noastre, asa cum a fost el stocat pe server
+    // vom face un request, similar cu cel de mai sus, un GET, dar de data acesta cu id-ul postarii ce tocmai am creat-o
+    // deci la URL vom concatena acest id
 
-        // !!!!!!! folosind acest fake API, request-ul de mai jos o sa returneze 404, pentru ca in realitate 
-        // el nu creaza elementul ce zice mai sus ca e creat !!!!!!!
+    // !!!!!!! folosind acest fake API, request-ul de mai jos o sa returneze 404, pentru ca in realitate 
+    // el nu creaza elementul ce zice mai sus ca e creat !!!!!!!
 
    fetch(url + "/posts/" + jsonResponse.id , {
        method: "GET"
@@ -156,9 +156,9 @@ Mai jos avem ontinutul original al postarii ce vrem sa o actualizam cu datele di
 
 ```javascript
 console.log("ceva cod executat INAINTE de requestul la server pt a updata postarea");
-    // documentatia ne indica URL-ul si path-ul spre care facem request-ul
-    // acest path trebuie sa contina si id-ul postarii ce vrem sa o actualizam
-    // si vom face un request de tip PUT care are in body, obiectul nostru serializat (convertit in string JSON)
+// documentatia ne indica URL-ul si path-ul spre care facem request-ul
+// acest path trebuie sa contina si id-ul postarii ce vrem sa o actualizam
+// si vom face un request de tip PUT care are in body, obiectul nostru serializat (convertit in string JSON)
 fetch(url + "/posts/1", {
     method: "PUT",
     body: JSON.stringify(updatePost)
