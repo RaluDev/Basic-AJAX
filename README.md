@@ -4,7 +4,7 @@
 ```
 var url = "https://jsonplaceholder.typicode.com";
 ```        
-// vom folosy fetch pentru a face un request de tip GET, pentru a obtine detaliile unei postari
+// vom folosi fetch pentru a face un request de tip GET, pentru a obtine detaliile unei postari
 // acel 1 reprezinta id-ul postarii a carei detalii vrem sa le luam
 ```
 fetch(url + "/posts/1", {
@@ -17,33 +17,33 @@ fetch(url + "/posts/1", {
 }).then(function(jsonResp){
    // odara convertit, vom avea in variabila jsonResp, obiectul de mai jos:
    console.log(jsonResp);
-//     /*
-//     {
-//     "userId": 1,
-//     "id": 1,
-//     "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
-//     "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
-//     }
-//     */
+  //{
+  //     "userId": 1,
+  //     "id": 1,
+  //     "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+  //     "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+  //}
+
         // pentru a afisa in pagina titlul si respectiv continutul postarii
         // avem nevoie sa cream cele doua elemente HTML, pe care deocamdata le stocam in 
         // doua variabile headerTitle si respectiv paragraph
-//     var headerTitle = document.createElement("h1");
-//     var paragraph = document.createElement("p");
+     var headerTitle = document.createElement("h1");
+     var paragraph = document.createElement("p");
 
         // pe header title am folosit innerText, deoarece am presupus ca textul nu poate contine 
         // elemente HTML si ca este un simplu text
-//     headerTitle.innerText = jsonResp.title;
+     headerTitle.innerText = jsonResp.title;
         // pentru paragraf am folosit innerHTML, deoarece am presupus ca in continut putem avea elemente
         // html si vom vrea sa fie afisate frumos in pagina
-//     paragraph.innerHTML = jsonResp.body;
+     paragraph.innerHTML = jsonResp.body;
         // pentru a pune elementele in pagina, trebuie mai intai sa "selectam" elementul body
-//     var theBody = document.querySelector("body");
+     var theBody = document.querySelector("body");
         // iar apoi sa punem in el cele doua elemente headerTitle si respectiv paragraph
-//     theBody.appendChild(headerTitle);
-//     theBody.appendChild(paragraph);
+     theBody.appendChild(headerTitle);
+     theBody.appendChild(paragraph);
 
-// });
+});
+```
 
 
 // daca facem o cerere la server sa ne dea toata lista de postari pe care le are
