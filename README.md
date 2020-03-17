@@ -1,12 +1,12 @@
 # Basic-AJAX
 
 // definim domeniul (url-ul serverului) intr-o variabila pentru ca il vom refolosi
-```
+```javascript
 var url = "https://jsonplaceholder.typicode.com";
 ```        
 // vom folosi fetch pentru a face un request de tip GET, pentru a obtine detaliile unei postari
 // acel 1 reprezinta id-ul postarii a carei detalii vrem sa le luam
-```
+```javascript
 fetch(url + "/posts/1", {
   method: "GET"
 }).then(function(response){
